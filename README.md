@@ -1,17 +1,26 @@
-# Simple Todo App
+# FocusList app
 
-Give a brief description of the project here. Feel free to give it a different name.
+A small, keyboard-friendly Todo app built with vanilla JavaScript and ES modules. Create tasks with dates, mark them complete, and remove them—backed by a clean architecture using two small, focused classes: Todo for UI items and FormValidator for client-side validation.
 
-## Functionality
+## How it works
 
-Give a more detailed explanation of the project and its functionality.
+-Create todos (title + optional date)
+-Mark complete or unmark
+-Delete
+-Live client-side validation (errors + disabled submit)
+-Keyboard-friendly focus states
+-ES Modules with single-responsibility classes
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+-HTML5, CSS3
+-Vanilla JavaScript (ES Modules)
+-Form validation using HTML5 constraints + custom UI states
+-UUID for unique ids if you add persistence/advanced features
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+Live Demo: 
+
