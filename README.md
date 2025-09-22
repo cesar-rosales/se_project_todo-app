@@ -30,4 +30,4 @@ Submit:
 
 This project is deployed on GitHub Pages:
 
-Live Demo:
+Live Demo:https://cesar-rosales.github.io/todo-app-project/
