@@ -29,4 +29,4 @@ Small, keyboard-friendly Todo app built with vanilla JavaScript and ES modules. 
 ## Deployment
 This project is deployed on GitHub Pages:
 
-**Live Demo:** https://cesar-rosales.github.io/todo-app-project/
+**Live Demo:** https://cesar-rosales.github.io/se_project_todo-app/
