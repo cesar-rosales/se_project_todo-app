@@ -10,7 +10,7 @@ class Todo {
     };
     this._todoTemplate = document.querySelector(selector);
   }
-  setEventListeners() {
+  _setEventListeners() {
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._data.completed;
     });
@@ -46,7 +46,7 @@ class Todo {
 
   
     this._generateCheckboxEl();
-    this.setEventListeners();
+    this._setEventListeners();
 
     return this._todoElement;
   }
