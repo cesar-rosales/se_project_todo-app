@@ -1,4 +1,4 @@
- class FormValidator {
+class FormValidator {
   constructor(config, formElement) {
     this._formElement = formElement;
 
@@ -12,7 +12,6 @@
     this._buttonElement = null;
   }
 
- 
   _setEventListeners() {
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
@@ -49,7 +48,9 @@
   }
 
   _showInputError(inputElement, errorMessage) {
-    const errorEl = this._formElement.querySelector(`#${inputElement.id}-error`);
+    const errorEl = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     inputElement.classList.add(this._inputErrorClass);
     if (errorEl) {
       errorEl.textContent = errorMessage;
@@ -58,7 +59,9 @@
   }
 
   _hideInputError(inputElement) {
-    const errorEl = this._formElement.querySelector(`#${inputElement.id}-error`);
+    const errorEl = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     inputElement.classList.remove(this._inputErrorClass);
     if (errorEl) {
       errorEl.classList.remove(this._errorClass);
@@ -74,7 +77,7 @@
   resetValidation() {
     this._formElement.reset();
     this._inputList.forEach((inputEl) => this._hideInputError(inputEl));
-    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._toggleButtonState();
     this._buttonElement.disabled = true;
   }
 }
