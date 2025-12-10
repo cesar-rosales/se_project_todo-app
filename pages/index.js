@@ -11,21 +11,33 @@ const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = addTodoPopup.querySelector(".popup__form");
 
-let todoCounter;
+const todoCounter = new TodoCounter(initialTodos, ".counter__text");
+
+let todoSection;
 
 function renderTodoItem(item) {
-  const todo = new Todo(item, "#todo-template");
+  const todo = new Todo(item, "#todo-template", {
+    handleToggle: (isComplete) => {
+      console.log("Toggled:", isComplete);
+      todoCounter.updateCompleted(isComplete ? true : false);
+    },
+    handleDelete: (wasComplete) => {
+      todoCounter.updateTotal(false);
+      if (wasComplete) {
+        todoCounter.updateCompleted(false);
+      }
+    },
+  });
+
   const todoElement = todo.getView();
   todoSection.addItem(todoElement);
 }
 
-const todoSection = new Section({
+todoSection = new Section({
   items: initialTodos,
   renderer: renderTodoItem,
   containerSelector: ".todos__list",
 });
-
-const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
 const addTodoPopupInstance = new PopupWithForm(
   "#add-todo-popup",
@@ -33,16 +45,31 @@ const addTodoPopupInstance = new PopupWithForm(
     const name = formData.name;
     const dateInput = formData.date;
 
-    const date = new Date(dateInput);
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+    const date = dateInput ? new Date(dateInput) : null;
+    if (date) {
+      date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+    }
 
     const id = uuidv4();
 
-    const newTodo = { name, date, id, isComplete: false };
-    const todo = new Todo(newTodo, "#todo-template");
+    const newTodo = { name, date, id, completed: false };
+
+    const todo = new Todo(newTodo, "#todo-template", {
+      handleToggle: (isComplete) => {
+        todoCounter.updateCompleted(isComplete);
+      },
+      handleDelete: (wasComplete) => {
+        todoCounter.updateTotal(false);
+        if (wasComplete) {
+          todoCounter.updateCompleted(false);
+        }
+      },
+    });
 
     const todoElement = todo.getView();
     todoSection.addItem(todoElement);
+    todoCounter.updateTotal(true);
+
     newTodoValidator.resetValidation();
     addTodoPopupInstance.close();
   }
