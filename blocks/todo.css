@@ -70,6 +70,10 @@
   cursor: pointer;
 }
 
+.todo__delete-btn:hover {
+  text-decoration: underline;
+}
+
 .todo__delete-btn::before {
   content: "Delete";
 }

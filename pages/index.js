@@ -18,8 +18,7 @@ let todoSection;
 function renderTodoItem(item) {
   const todo = new Todo(item, "#todo-template", {
     handleToggle: (isComplete) => {
-      console.log("Toggled:", isComplete);
-      todoCounter.updateCompleted(isComplete ? true : false);
+      todoCounter.updateCompleted(isComplete);
     },
     handleDelete: (wasComplete) => {
       todoCounter.updateTotal(false);
@@ -29,8 +28,7 @@ function renderTodoItem(item) {
     },
   });
 
-  const todoElement = todo.getView();
-  todoSection.addItem(todoElement);
+  return todo.getView();
 }
 
 todoSection = new Section({
@@ -54,19 +52,7 @@ const addTodoPopupInstance = new PopupWithForm(
 
     const newTodo = { name, date, id, completed: false };
 
-    const todo = new Todo(newTodo, "#todo-template", {
-      handleToggle: (isComplete) => {
-        todoCounter.updateCompleted(isComplete);
-      },
-      handleDelete: (wasComplete) => {
-        todoCounter.updateTotal(false);
-        if (wasComplete) {
-          todoCounter.updateCompleted(false);
-        }
-      },
-    });
-
-    const todoElement = todo.getView();
+    const todoElement = renderTodoItem(newTodo);
     todoSection.addItem(todoElement);
     todoCounter.updateTotal(true);
 
