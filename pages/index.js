@@ -1,5 +1,3 @@
-document.title = "Simple ToDo App";
-
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 import { initialTodos, validationConfig } from "../utils/constants.js";
@@ -8,25 +6,39 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import TodoCounter from "../components/TodoCounter.js";
+import { loadTodos, saveTodos } from "../utils/storage.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = addTodoPopup.querySelector(".popup__form");
 
-const todoCounter = new TodoCounter(initialTodos, ".counter__text");
+const storedTodos = loadTodos();
+const todos = storedTodos ?? initialTodos;
+
+let todosState = [...todos];
+const todoCounter = new TodoCounter(todos, ".counter__text");
 
 let todoSection;
 
 function renderTodoItem(item) {
   const todo = new Todo(item, "#todo-template", {
-    handleToggle: (isComplete) => {
+    handleToggle: (isComplete, id) => {
       todoCounter.updateCompleted(isComplete);
+
+      todosState = todosState.map((t) =>
+        t.id === id ? { ...t, completed: isComplete } : t
+      );
+      saveTodos(todosState);
     },
-    handleDelete: (wasComplete) => {
+
+    handleDelete: (wasComplete, id) => {
       todoCounter.updateTotal(false);
       if (wasComplete) {
         todoCounter.updateCompleted(false);
       }
+
+      todosState = todosState.filter((t) => t.id !== id);
+      saveTodos(todosState);
     },
   });
 
@@ -34,7 +46,7 @@ function renderTodoItem(item) {
 }
 
 todoSection = new Section({
-  items: initialTodos,
+  items: todos,
   renderer: renderTodoItem,
   containerSelector: ".todos__list",
 });
@@ -53,6 +65,8 @@ const addTodoPopupInstance = new PopupWithForm(
     const id = uuidv4();
 
     const newTodo = { name, date, id, completed: false };
+    todosState = [...todosState, newTodo];
+    saveTodos(todosState);
 
     const todoElement = renderTodoItem(newTodo);
     todoSection.addItem(todoElement);

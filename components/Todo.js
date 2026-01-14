@@ -20,7 +20,7 @@ class Todo {
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = this._todoCheckboxEl.checked;
       if (this._handleToggle) {
-        this._handleToggle(this._data.completed);
+        this._handleToggle(this._data.completed, this._data.id);
       }
     });
     this.todoDeleteBtn.addEventListener("click", () => {
@@ -28,7 +28,7 @@ class Todo {
       this._todoElement.remove();
 
       if (this._handleDelete) {
-        this._handleDelete(wasCompleted);
+        this._handleDelete(wasCompleted, this._data.id);
       }
     });
   }
