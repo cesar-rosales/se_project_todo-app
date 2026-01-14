@@ -24,7 +24,8 @@
 .popup__content {
   max-width: 510px;
   width: 100%;
-  background-color: #fff;
+  background-color: #ffffff;
+  border: 1px solid #0037ffb6;
   border-radius: 10px;
   position: relative;
   box-sizing: border-box;
@@ -55,6 +56,7 @@
   font-size: 32px;
   line-height: 1.2;
   font-weight: 700;
+  color: #181818;
 }
 
 .popup__form {
@@ -76,12 +78,13 @@
   font-size: 16px;
   line-height: 1.2;
   font-weight: 500;
-  color: #7d7d7d;
+  color: #5f6b63;
 }
 
 .popup__input {
   width: 100%;
-  border: 1px solid #7d7d7d;
+  background-color: #ffffff;
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 8px;
   font-weight: 500;
   font-size: 16px;
@@ -93,20 +96,20 @@
 }
 
 .popup__input::placeholder {
-  color: #7d7d7d;
+  color: #656565;
 }
 
 .popup__input:focus {
-  outline: none;
-  border: 1px solid #181818;
+  border-color: #5877e7ba;
+  box-shadow: 0 0 0 1px rgba(0, 42, 255, 0.72);
 }
 
 .popup__input:focus::placeholder {
-  color: #181818;
+  color: #656565;
 }
 
 .popup__input_type_date {
-  color: #7d7d7d;
+  color: #656565;
 }
 
 .popup__input_type_error {
@@ -134,7 +137,7 @@
   font-weight: 600;
   line-height: 1.2;
   color: #fff;
-  background-color: #5877e7;
+  background-color: #2f8f5b;
   border-radius: 8px;
   border: none;
   transition: visibility 0s, background 0.3s;
