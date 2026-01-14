@@ -1,95 +1,74 @@
-# Simple ToDO app
+# Simple ToDo App
 
-Small, keyboard-friendly Todo app built with vanilla JavaScript and ES modules. Add tasks with dates, mark them complete, and remove them—powered by two focused classes: `Todo` (UI item) and `FormValidator` (client-side validation).
+A clean, keyboard-friendly ToDo application built with **vanilla JavaScript**, ES modules, and modular class-based architecture. Users can create tasks with optional dates, mark them complete, delete them, and have their data persist across page reloads using `localStorage`.
 
-## Features
+This project focuses on **state management, DOM manipulation, validation, and persistence** without using a framework.
+
+---
+
+## 🚀 Live Demo
+
+👉 https://cesar-rosales.github.io/se_project_todo-app/
+
+## 💻 Repository
+
+👉 https://github.com/cesar-rosales/se_project_todo-app
+
+---
+
+## ✨ Features
 
 - Add new todos via popup form (title + optional date)
-- Mark complete / incomplete
+- Client-side form validation
+- Mark todos complete / incomplete
 - Delete individual todos
-- Live completion counter ("Showing X out of Y completed")
-- Client-side validation (inline errors, disabled submit)
-- Todos rendered dynamically using a Section class
-- Reusable popup system with close-on-overlay + Escape key
-- Clean modular structure using ES modules and single-responsability classes
+- Persistent data using `localStorage`
+- Dynamic completed/total counter
+- Responsive, minimal UI
 
-## New Architecture
+---
 
-This sprint introduced a full refactor of the Todo app into modular, loosely-coupled components:
+## 🧠 Architecture & Concepts
 
-- **Section**  
-  Renders lists of items and inserts new todos into the DOM.
-- **Popup**  
-  Base popup class that handles opening, closing, Escape key events, and overlay clicks.
-- **PopupWithForm**  
-  Extends Popup and handles form submission + input collection.
-- **TodoCounter**  
-  Tracks total todos and total completed; updates UI live on add, toggle, and delete.
+- **ES6 Classes**
 
-These components interact only through public methods, keeping the architecture clean and scalable.
+  - `Todo` — handles individual todo rendering and interactions
+  - `Section` — manages rendering lists of items
+  - `PopupWithForm` — reusable popup form logic
+  - `FormValidator` — centralized form validation
+  - `TodoCounter` — tracks completed vs total items
 
-## How it works
+- **State Management**
 
-### Todo
+  - In-memory state synced with `localStorage`
+  - State updates on add, toggle, and delete
 
-Responsible for rendering one todo item (name,date,checkbox,delete button) and attaching item specific event listeners (toggle + delete)
+- **Accessibility & UX**
+  - Keyboard-friendly form
+  - Semantic HTML
+  - Clear visual feedback for interactions
 
-### Section
+---
 
-Takes an array of todos and a renderer function.
-Controls rendering on page load and inserting new items.
+## 🛠️ Tech Stack
 
-### Popup & PopupWithForm
-
-Reusable modal components.
-Popup handles open/close logic; PopupWithForm adds form submission handling.
-
-### TodoCounter
-
-Listens to item events (add, toggle, delete) and updates the counter text:
-"Showing X out of Y completed".
-
-### FormValidator
-
-Handles inline validation, error messages, and submit button state for the popup form.
-
-## App Flow
-
-1. Section renders all initial todos.
-2. TodoCounter calculates starting tot
-3. User opens popup → PopupWithForm handles input + validation.
-4. On submit → new Todo instance → Section inserts it → TodoCounter updates totals.
-5. Checkbox toggle → Todo triggers callback → TodoCounter updates completed count.
-6. Delete → Todo triggers callback → Section removes item → TodoCounter updates totals.
-
-## Technology
-
-- HTML5, CSS3
+- HTML5
+- CSS3 (BEM methodology)
 - Vanilla JavaScript (ES Modules)
-- Form validation using HTML5 constraints + custom UI states
-- (Optional) UUID for unique IDs if you add persistence
-- Object-oriented architecture with reusable components
-- Popup system implemented with inheritance (Popup → PopupWithForm)
+- LocalStorage API
 
-## Project Structure
+---
 
-/src  
- /components  
- - Todo.js  
- - Section.js  
- - Popup.js  
- - PopupWithForm.js  
- - TodoCounter.js  
- - FormValidator.js  
- /utils  
- - constants.js  
- /pages  
- - index.js  
- /templates  
- - todo-template (inside index.html)
+## 🔮 Possible Improvements
 
-## Deployment
+- Edit existing todos
+- Filter by completed / active
+- Backend API integration
+- React refactor
 
-This project is deployed on GitHub Pages:
+---
 
-**Live Demo:** https://cesar-rosales.github.io/se_project_todo-app/
+## 📌 Author
+
+**Cesar Rosales**  
+Front-End Developer
